@@ -53,7 +53,7 @@
 
     var Page = React.createClass({
         render(){
-            // TODO do this via states
+
             var pageContent;
             if(this.props.currentPage === 'home'){
                 pageContent = 'This is home Page';
@@ -74,12 +74,17 @@
     });
 
     var Theme = React.createClass({
+        getInitialState(){
+            return{
+             currentPage: 'home'
+            }
+        },
         render(){
             return(
             <div>
-                  <Navbar currentPage='home' brand='ReactStrap' />
+                  <Navbar currentPage={this.state.currentPage} brand='ReactStrap' />
                   <Jumbotron heading='My Garden Blog' text = 'This is a bootstrap theme that uses React.js components' />
-                  <Page currentPage='home'  />
+                  <Page currentPage={this.state.currentPage}  />
              </div>
             );
         }
