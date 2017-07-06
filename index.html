@@ -13,12 +13,17 @@
     <script type="text/babel">
 
     var Navbar = React.createClass({
+        getDefaultProps(){
+            return{
+                brand:'DefaultBrand'
+            }
+        },
         render(){
             return(
             <nav className = "navbar navbar-default">
             <div className = "container">
                    <div className = "navbar-header">
-                      <a className= "navbar-brand" href="#">ReactStrap</a>
+                      <a className= "navbar-brand" href="#">{this.props.brand}</a>
                   </div>
                   <div id ="navbar">
                         <ul className = "nav navbar-nav">
@@ -37,8 +42,8 @@
             return(
                 <div className="jumbotron">
                     <div className = "container">
-                        <h1>Hello world</h1>
-                        <p className = "lead">This is a bootstrap theme that uses React.js components</p>
+                        <h1>{this.props.heading}</h1>
+                        <p className = "lead">{this.props.text}</p>
                         <p> <a className = "btn btn-primary btn-lg" href='#' role = "button">Learn more</a></p>
                   </div>
                 </div>
@@ -51,7 +56,8 @@
             return(
                 <div>
                   <div className="container">
-                    This is a home page
+                  <h2>{this.props.currentPage.charAt(0).toUpperCase() + this.props.currentPage.slice(1)}</h2>
+                  <h3>{this.props.currentPageTitle}</h3>
                   </div>
                 </div>
             );
@@ -62,9 +68,9 @@
         render(){
             return(
             <div>
-                  <Navbar />
-                  <Jumbotron />
-                  <Page />
+                  <Navbar brand='ReactStrap' />
+                  <Jumbotron heading='My Garden Blog' text = 'This is a bootstrap theme that uses React.js components' />
+                  <Page currentPage='home' currentPageTitle = "This is the home page" />
              </div>
             );
         }
