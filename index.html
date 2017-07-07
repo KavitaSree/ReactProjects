@@ -13,10 +13,8 @@
     <script type="text/babel">
 
     var Navbar = React.createClass({
-        getDefaultProps(){
-            return{
-                brand:'DefaultBrand'
-            }
+        change(page){
+            this.props.change(page);
         },
         render(){
             return(
@@ -27,9 +25,9 @@
                   </div>
                   <div id ="navbar">
                         <ul className = "nav navbar-nav">
-                            <li className = {(this.props.currentPage === 'home') ? 'active' : ''}><a href="#">Home</a></li>
-                            <li className = {(this.props.currentPage === 'about') ? 'active' : ''}><a  href="#">About</a></li>
-                            <li className = {(this.props.currentPage === 'contact') ? 'active' : ''}><a  href="#">Contact</a></li>
+                            <li className = {(this.props.currentPage === 'home') ? 'active' : ''}><a onClick={this.change.bind(this,'home')} href="#">Home</a></li>
+                            <li className = {(this.props.currentPage === 'about') ? 'active' : ''}><a onClick={this.change.bind(this,'about')} href="#">About</a></li>
+                            <li className = {(this.props.currentPage === 'contact') ? 'active' : ''}><a onClick={this.change.bind(this,'contact')} href="#">Contact</a></li>
                         </ul>
                    </div>
                 </div>
@@ -74,16 +72,27 @@
     });
 
     var Theme = React.createClass({
+        handleChange(page){
+            //alert(page);
+            this.setState({currentPage:page});
+        },
         getInitialState(){
             return{
              currentPage: 'home'
             }
         },
+        getDefaultProps(){
+            return{
+                brand: 'ReactStrap',
+                heading: 'My Garden Blog',
+                text:'This is a bootstrap theme that uses React.js components'
+            }
+        },
         render(){
             return(
             <div>
-                  <Navbar currentPage={this.state.currentPage} brand='ReactStrap' />
-                  <Jumbotron heading='My Garden Blog' text = 'This is a bootstrap theme that uses React.js components' />
+                  <Navbar currentPage={this.state.currentPage} brand= {this.props.brand} change={this.handleChange} />
+                  <Jumbotron heading={this.props.headin} text = {this.props.text} />
                   <Page currentPage={this.state.currentPage}  />
              </div>
             );
